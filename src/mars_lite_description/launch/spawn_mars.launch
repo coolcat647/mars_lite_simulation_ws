@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <arg name="robot_init_x" default="0.0" />
+    <arg name="robot_init_y" default="0.0" />
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description"
+        command="$(find xacro)/xacro.py '$(find mars_lite_description)/urdf/mars_lite_with_gripper.urdf.xacro'" />
+
+    <!-- Spawn the robot model -->
+    <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" 
+        args="-param robot_description -urdf
+                -model mars
+                -J mars::tm_left_wheel 0
+                -J mars::tm_right_wheel 0
+                -J mars::tm_elbow_joint 1.97
+                -J mars::tm_shoulder_1_joint 0
+                -J mars::tm_shoulder_2_joint -0.73
+                -J mars::tm_wrist_1_joint -1.2391
+                -J mars::tm_wrist_2_joint 1.5707
+                -J mars::tm_wrist_3_joint 0
+                -unpause"
+                respawn="false" output="screen"
+                />
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <param name="publish_frequency" type="double" value="50.0" />
+        <param name="tf_prefix" type="string" value="" />
+    </node>
+
+    <!-- Fake Calibration -->
+    <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+        args="pub /calibrated std_msgs/Bool true" />
+
+    <!-- load the controllers -->
+    <!-- joint_state_controller -->
+    <rosparam file="$(find mars_lite_moveit_config)/config/mars_joint_state_controller.yaml" command="load"/>
+    <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager"
+        args="spawn joint_state_controller" respawn="false" output="screen"/>
+
+    <!-- start arm controller -->
+    <rosparam file="$(find mars_lite_moveit_config)/config/mars_arm_controller_tm.yaml" command="load"/>
+    <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager"
+        args="spawn arm_controller" respawn="false" output="screen"/>
+</launch>

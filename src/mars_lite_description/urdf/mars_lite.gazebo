@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo reference='base_link_to_tm_base_link'>
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <!-- <gazebo reference='tm_tip_fixed_joint'>
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference='tm_tip_link-tool0'>
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <gazebo reference='tm_tip_link_gripper_base_joint'>
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo> -->
+    <!-- <gazebo reference='tm_tip_link_to_tm_gripper'>
+        <disableFixedJointLumping>true</disableFixedJointLumping>
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo> -->
+
+
+    <gazebo reference="base_link">
+        <!-- <selfCollide>true</selfCollide> -->
+        <!-- <mu1 value="0.01"/> -->
+        <!-- <mu2 value="0.01"/> -->
+        <kp  value="1000000.0" />
+        <kd  value="1000000.0" />
+        <fdir1 value="1 0 0" />
+        <minDepth value="0.001" />
+    </gazebo>
+
+    <!-- <gazebo reference="left_wheel">
+        <mu1 value="1.5"/>
+        <mu2 value="1.5"/>
+        <kp  value="1000000.0" />
+        <kd  value="10000.0" />
+        <fdir1 value="1 0 0"/>
+    </gazebo>
+
+    <gazebo reference="right_wheel">
+        <mu1 value="1.5"/>
+        <mu2 value="1.5"/>
+        <kp  value="1000000.0" />
+        <kd  value="10000.0" />
+        <fdir1 value="1 0 0"/>
+    </gazebo> -->
+
+    <!-- <transmission name="left_wheel_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_wheel">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_wheel">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="right_wheel_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_wheel">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_wheel">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission> -->
+
+    <!-- <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+        <legacyMode>false</legacyMode>
+        <publishWheelTF>false</publishWheelTF>
+        <publishWheelJointState>false</publishWheelJointState>
+        <publishOdomTF>true</publishOdomTF>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>40</updateRate>
+        <leftJoint>left_wheel</leftJoint>
+        <rightJoint>right_wheel</rightJoint>
+        <wheelSeparation>0.393</wheelSeparation>
+        <wheelDiameter>0.2032</wheelDiameter>
+        <wheelTorque>100</wheelTorque>
+        <commandTopic>cmd_vel</commandTopic>
+        <odometrySource>0</odometrySource>
+        <odometryTopic>odom_filtered</odometryTopic>
+        <odometryFrame>/odom</odometryFrame>
+        <robotBaseFrame>/base_link</robotBaseFrame>
+        </plugin>
+    </gazebo> -->
+
+</robot>
