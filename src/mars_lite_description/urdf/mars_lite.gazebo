@@ -3,7 +3,6 @@
 
     <gazebo reference='base_link_to_tm_base_link'>
         <disableFixedJointLumping>true</disableFixedJointLumping>
-        <preserveFixedJoint>true</preserveFixedJoint>
     </gazebo>
     <!-- <gazebo reference='tm_tip_fixed_joint'>
         <disableFixedJointLumping>true</disableFixedJointLumping>
@@ -24,32 +23,30 @@
 
 
     <gazebo reference="base_link">
-        <!-- <selfCollide>true</selfCollide> -->
-        <!-- <mu1 value="0.01"/> -->
-        <!-- <mu2 value="0.01"/> -->
+        <mu1 value="0.01"/>
+        <mu2 value="0.01"/>
         <kp  value="1000000.0" />
-        <kd  value="1000000.0" />
+        <kd  value="10000.0" />
         <fdir1 value="1 0 0" />
-        <minDepth value="0.001" />
     </gazebo>
 
+    <!-- Uncomment for simulating the 'chatter' moving behavior -->
     <!-- <gazebo reference="left_wheel">
-        <mu1 value="1.5"/>
-        <mu2 value="1.5"/>
+        <mu1 value="1.0"/>
+        <mu2 value="1.0"/>
         <kp  value="1000000.0" />
         <kd  value="10000.0" />
         <fdir1 value="1 0 0"/>
     </gazebo>
-
     <gazebo reference="right_wheel">
-        <mu1 value="1.5"/>
-        <mu2 value="1.5"/>
+        <mu1 value="1.0"/>
+        <mu2 value="1.0"/>
         <kp  value="1000000.0" />
         <kd  value="10000.0" />
         <fdir1 value="1 0 0"/>
     </gazebo> -->
 
-    <!-- <transmission name="left_wheel_trans">
+    <transmission name="left_wheel_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="left_wheel">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
@@ -69,9 +66,9 @@
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
-    </transmission> -->
+    </transmission>
 
-    <!-- <gazebo>
+    <gazebo>
         <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
         <legacyMode>false</legacyMode>
         <publishWheelTF>false</publishWheelTF>
@@ -90,6 +87,6 @@
         <odometryFrame>/odom</odometryFrame>
         <robotBaseFrame>/base_link</robotBaseFrame>
         </plugin>
-    </gazebo> -->
+    </gazebo>
 
 </robot>

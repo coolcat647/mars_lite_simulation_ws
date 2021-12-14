@@ -41,6 +41,7 @@
     </inertial>
   </xacro:macro>
 
+
   <!-- Base Link -->
   <link name="base_link">
     <visual>
@@ -50,17 +51,15 @@
       </geometry>
     </visual>
     <collision>
-      <!-- <origin rpy="0 0 0" xyz="${mob_base_length/2-mob_base_lower_plate_length/2} 0 ${mob_base_height/2}"/> -->
       <origin xyz="0 0 ${mob_base_height/2 - wheel_radius * 0.5}" rpy="0 0 0"/>
       <geometry>
-        <box size="${mob_base_lower_plate_length} ${mob_base_width} ${mob_base_height + wheel_radius * 0.5}"/>
+        <box size="${mob_base_lower_plate_length} ${mob_base_width} ${mob_base_height + wheel_radius * 1.0}"/>
       </geometry>
     </collision>
     <inertial>
-      <!-- <origin xyz="${mob_base_length/2-mob_base_lower_plate_length/2} 0 ${mob_base_height/2}" rpy="0 0 0" /> -->
       <origin xyz="0 0 ${mob_base_height/2 - wheel_radius * 0.5}" rpy="0 0 0" />
       <mass value="160.0" />
-      <box_inertia m="160.0" x="${mob_base_lower_plate_length}" y="${mob_base_width}" z="${mob_base_height + wheel_radius * 0.5}" />
+      <box_inertia m="160.0" x="${mob_base_lower_plate_length}" y="${mob_base_width}" z="${mob_base_height + wheel_radius * 1.0}" />
     </inertial>
   </link>
 
@@ -79,7 +78,6 @@
           <cylinder radius="${wheel_radius}" length="0.03"/>
         </geometry>
       </collision>
-      <!-- <xacro:default_inertial mass="1"/> -->
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <mass value="10" />
@@ -91,28 +89,24 @@
       <parent link="base_link"/>
       <child link="${prefix}_wheel"/>
       <origin xyz="0 ${reflect*wheels_distance/2} 0" rpy="0 0 0"/>
-      <!-- <joint_properties damping="1.0" friction="0.0"/> -->
-      <!-- <limit effort="10000" velocity="10000"/> -->
     </joint>
   </xacro:macro>
-  <!-- <xacro:wheel prefix="right" reflect="-1"/> -->
-  <!-- <xacro:wheel prefix="left" reflect="1"/> -->
+  <xacro:wheel prefix="right" reflect="-1"/>
+  <xacro:wheel prefix="left" reflect="1"/>
 
 
-  <!-- tm common stuff -->
+  <!-- tm5 gazebo common stuff -->
   <xacro:include filename="$(find tm5_description)/urdf/common.gazebo.xacro" />
   <!-- tm5_700 -->
   <xacro:include filename="$(find tm5_description)/urdf/tm5_700.urdf.xacro" />
 
   <!-- arm instance -->
-  <xacro:tm5_700_robot prefix="tm_" joint_limited="false" stl_mesh="true" />
+  <xacro:tm5_700_robot prefix="tm_" joint_limited="true" stl_mesh="true" />
 
   <joint name="base_link_to_tm_base_link" type="fixed">
     <parent link="base_link" />
     <child link = "tm_base" />
     <origin xyz="${tm_x_offset} 0.0 ${mob_base_height}" rpy="0.0 0.0 0.0" />
-    <joint_properties damping="1000.0" friction="10000.0"/>
-    <limit effort="10000" velocity="10000"/>
   </joint>
 
   <!-- Frame for gripper TCP  -->
