@@ -35,9 +35,9 @@
   </group> -->
 
   <!-- publish the robot state (tf transforms) -->
-  <group if="$(arg sim)">
+  <!-- <group if="$(arg sim)">
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-  </group>
+  </group> -->
 
   <include file="$(find mars_lite_moveit_config)/launch/move_group.launch">
     <arg name="publish_monitored_planning_scene" value="true"/>

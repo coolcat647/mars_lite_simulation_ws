@@ -18,6 +18,12 @@
   <xacro:property name="base_to_wheels_axel" value="0.01045"/>
   <xacro:property name="mob_base_lower_plate_length" value="0.630"/>
 
+  <!-- TM5 robot arm contrl box properties -->
+  <xacro:property name="tm_cntrl_box_length" value="0.29"/>
+  <xacro:property name="tm_cntrl_box_width" value="0.43"/>
+  <xacro:property name="tm_cntrl_box_height" value="0.23"/>
+  <xacro:property name="tm_cntrl_box_x_offset" value="-0.125"/>
+
   <!-- arm positioning -->
   <xacro:property name="tm_x_offset" value="0.350"/>
 
@@ -58,10 +64,11 @@
     </collision>
     <inertial>
       <origin xyz="0 0 ${mob_base_height/2 - wheel_radius * 0.5}" rpy="0 0 0" />
-      <mass value="160.0" />
-      <box_inertia m="160.0" x="${mob_base_lower_plate_length}" y="${mob_base_width}" z="${mob_base_height + wheel_radius * 1.0}" />
+      <mass value="80.0" />
+      <box_inertia m="80.0" x="${mob_base_lower_plate_length}" y="${mob_base_width}" z="${mob_base_height + wheel_radius * 1.0}" />
     </inertial>
   </link>
+
 
   <!-- Wheels -->
   <xacro:macro name="wheel" params="prefix reflect">
@@ -95,12 +102,32 @@
   <xacro:wheel prefix="left" reflect="1"/>
 
 
-  <!-- tm5 gazebo common stuff -->
+  <!-- Robot arm contrl box -->
+  <link name="tm_cntrl_box">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${tm_cntrl_box_length} ${tm_cntrl_box_width} ${tm_cntrl_box_height}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="5.0" />
+      <box_inertia m="5.0" x="${tm_cntrl_box_length}" y="${tm_cntrl_box_width}" z="${tm_cntrl_box_height}" />
+    </inertial>
+  </link>
+  <joint name="base_link_to_cntrl_box" type="fixed">
+      <axis xyz="0 0 0" rpy="0 0 0" />
+      <parent link="base_link"/>
+      <child link="tm_cntrl_box"/>
+      <origin xyz="${tm_cntrl_box_x_offset} 0 ${mob_base_height + tm_cntrl_box_height/2}" rpy="0 0 0"/>
+  </joint>
+
+
+  <!-- tm5_700 gazebo common stuff -->
   <xacro:include filename="$(find tm5_description)/urdf/common.gazebo.xacro" />
   <!-- tm5_700 -->
   <xacro:include filename="$(find tm5_description)/urdf/tm5_700.urdf.xacro" />
-
-  <!-- arm instance -->
   <xacro:tm5_700_robot prefix="tm_" joint_limited="true" stl_mesh="true" />
 
   <joint name="base_link_to_tm_base_link" type="fixed">
@@ -109,20 +136,8 @@
     <origin xyz="${tm_x_offset} 0.0 ${mob_base_height}" rpy="0.0 0.0 0.0" />
   </joint>
 
-  <!-- Frame for gripper TCP  -->
-  <!-- <link name="tm_gripper"/>
-  <joint name="tm_tip_link_to_tm_gripper" type="fixed">
-    <parent link="tm_tip_link"/>
-    <child link="tm_gripper"/>
-    <origin xyz="0 0 ${0.1628+0.0139}" rpy="0 0 0"/>
-  </joint> -->
 
-  <!-- Robotiq from Beta Robots fork-->
-  <!-- <xacro:include filename="$(find robotiq_2f_model)/model/robotiq_2f_85.urdf.xacro" />
-  <xacro:robotiq_2f_85 name="gripper" parent="tm_tip_link" precise_collision="false" adaptive_transmission="false">
-    <origin xyz="0 0 0" rpy="0 0 1.5708" />
-  </xacro:robotiq_2f_85>   -->
-
+  <!-- Robotiq 85 gripper -->
   <xacro:include filename="$(find robotiq_description)/urdf/robotiq_85_gripper.urdf.xacro" />
   <xacro:robotiq_85_gripper prefix="" parent="tm_flange_link" >
     <origin xyz="0 0 0" rpy="${-pi / 2} ${-pi / 2} 0"/>
