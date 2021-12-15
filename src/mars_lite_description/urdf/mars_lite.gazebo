@@ -4,19 +4,7 @@
     <gazebo reference='base_link_to_tm_base_link'>
         <disableFixedJointLumping>true</disableFixedJointLumping>
     </gazebo>
-    <!-- <gazebo reference='tm_tip_fixed_joint'>
-        <disableFixedJointLumping>true</disableFixedJointLumping>
-        <preserveFixedJoint>true</preserveFixedJoint>
-    </gazebo>
-    <gazebo reference='tm_tip_link-tool0'>
-        <disableFixedJointLumping>true</disableFixedJointLumping>
-        <preserveFixedJoint>true</preserveFixedJoint>
-    </gazebo>
-    <gazebo reference='tm_tip_link_gripper_base_joint'>
-        <disableFixedJointLumping>true</disableFixedJointLumping>
-        <preserveFixedJoint>true</preserveFixedJoint>
-    </gazebo> -->
-    <!-- <gazebo reference='tm_tip_link_to_tm_gripper'>
+    <!-- <gazebo reference='footprint_joint'>
         <disableFixedJointLumping>true</disableFixedJointLumping>
         <preserveFixedJoint>true</preserveFixedJoint>
     </gazebo> -->

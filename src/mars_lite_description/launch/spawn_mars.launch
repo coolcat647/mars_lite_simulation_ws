@@ -5,7 +5,7 @@
 
     <!-- Load the URDF into the ROS Parameter Server -->
     <param name="robot_description"
-        command="$(find xacro)/xacro.py '$(find mars_lite_description)/urdf/mars_lite_with_gripper.urdf.xacro'" />
+        command="$(find xacro)/xacro '$(find mars_lite_description)/urdf/mars_lite_with_gripper.urdf.xacro'" />
 
     <!-- Spawn the robot model -->
     <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" 
