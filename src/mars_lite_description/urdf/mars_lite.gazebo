@@ -36,7 +36,7 @@
 
     <transmission name="left_wheel_trans">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="left_wheel">
+        <joint name="left_wheel_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="left_wheel">
@@ -47,7 +47,7 @@
 
     <transmission name="right_wheel_trans">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="right_wheel">
+        <joint name="right_wheel_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="right_wheel">
@@ -66,8 +66,8 @@
             <publishOdomTF>true</publishOdomTF>
             <alwaysOn>true</alwaysOn>
             <updateRate>40</updateRate>
-            <leftJoint>left_wheel</leftJoint>
-            <rightJoint>right_wheel</rightJoint>
+            <leftJoint>left_wheel_joint</leftJoint>
+            <rightJoint>right_wheel_joint</rightJoint>
             <wheelSeparation>0.393</wheelSeparation>
             <wheelDiameter>0.2032</wheelDiameter>
             <wheelTorque>10.0</wheelTorque>
