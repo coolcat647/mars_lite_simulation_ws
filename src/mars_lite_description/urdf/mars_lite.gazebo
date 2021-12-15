@@ -58,22 +58,26 @@
 
     <gazebo>
         <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-        <legacyMode>false</legacyMode>
-        <publishWheelTF>false</publishWheelTF>
-        <publishWheelJointState>false</publishWheelJointState>
-        <publishOdomTF>true</publishOdomTF>
-        <alwaysOn>true</alwaysOn>
-        <updateRate>40</updateRate>
-        <leftJoint>left_wheel</leftJoint>
-        <rightJoint>right_wheel</rightJoint>
-        <wheelSeparation>0.393</wheelSeparation>
-        <wheelDiameter>0.2032</wheelDiameter>
-        <wheelTorque>100</wheelTorque>
-        <commandTopic>cmd_vel</commandTopic>
-        <odometrySource>0</odometrySource>
-        <odometryTopic>odom_filtered</odometryTopic>
-        <odometryFrame>/odom</odometryFrame>
-        <robotBaseFrame>/base_link</robotBaseFrame>
+            <robotNamespace>/</robotNamespace>
+            <legacyMode>false</legacyMode>
+            <publishWheelTF>false</publishWheelTF>
+            <publishWheelJointState>false</publishWheelJointState>
+            <odometrySource>encoder</odometrySource>
+            <publishOdomTF>true</publishOdomTF>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>40</updateRate>
+            <leftJoint>left_wheel</leftJoint>
+            <rightJoint>right_wheel</rightJoint>
+            <wheelSeparation>0.393</wheelSeparation>
+            <wheelDiameter>0.2032</wheelDiameter>
+            <wheelTorque>10.0</wheelTorque>
+            <wheelAcceleration>0.5</wheelAcceleration>
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom_filtered</odometryTopic>
+            <odometryFrame>/odom</odometryFrame>
+            <robotBaseFrame>/base_link</robotBaseFrame>
+            <rosDebugLevel>na</rosDebugLevel>
+            <publishTf>1</publishTf>
         </plugin>
     </gazebo>
 

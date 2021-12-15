@@ -51,7 +51,7 @@
   <!-- Base Link -->
   <link name="base_link">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
           <mesh filename="package://mars_lite_description/meshes/mob_plat.dae"/>
       </geometry>
@@ -72,9 +72,9 @@
   <!-- Dummy footprint link -->
   <!-- <link name="base_footprint" />
   <joint name="footprint_joint" type="fixed">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <parent link="base_footprint"/>
-      <child link="base_link"/>
+      <origin xyz="0 0 ${-wheel_radius * 0.5}" rpy="0 0 0" />
+      <parent link="base_link"/>
+      <child link="base_footprint"/>
   </joint> -->
 
 
