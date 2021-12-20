@@ -10,3 +10,14 @@ sudo apt-get update
 sudo apt-get install -y ros-${ROS_DISTRO}-joint-trajectory-controller \
     ros-${ROS_DISTRO}-gripper-action-controller
 ```
+
+### Instructions
+```bash
+# Terminal 1 -- launch gazebo
+roslaunch mars_lite_description mars_gazebo.launch
+# If you have launch other gazebo environment already, please use "roslaunch mars_lite_description spawn_mars.launch" to spawn robot model.
+
+
+# Terminal 2 -- launch moveit gui
+roslaunch mars_lite_moveit_config mars_lite_moveit_planning_execution_gz.launch
+```
