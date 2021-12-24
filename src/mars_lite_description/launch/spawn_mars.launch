@@ -2,14 +2,20 @@
 <launch>
     <arg name="robot_init_x" default="0.0" />
     <arg name="robot_init_y" default="0.0" />
+    <arg name="laser_enabled" default="true" />
+    <arg name="realsense_enabled" default="false" />
 
     <!-- Load the URDF into the ROS Parameter Server -->
     <param name="robot_description"
-        command="$(find xacro)/xacro '$(find mars_lite_description)/urdf/mars_lite_with_gripper.urdf.xacro'" />
+        command="$(find xacro)/xacro '$(find mars_lite_description)/urdf/mars_lite_with_gripper.urdf.xacro' 
+                 laser_enabled:=$(arg laser_enabled)
+                 realsense_enabled:=$(arg realsense_enabled)" />
 
     <!-- Spawn the robot model -->
     <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" 
         args="-param robot_description -urdf
+                -x $(arg robot_init_x)
+                -y $(arg robot_init_y)
                 -model mars_lite
                 -J mars_lite::tm_left_wheel 0
                 -J mars_lite::tm_right_wheel 0
@@ -50,4 +56,20 @@
 
     <!-- <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager"
         respawn="false" output="screen" args="load joint_group_position_controller" /> -->
+
+
+    <group if="$(arg laser_enabled)">
+        <node name="laserscan_multi_merger" pkg="ira_laser_tools" type="laserscan_multi_merger">
+            <param name="destination_frame" value="merged_laser_frame"/>
+            <param name="cloud_destination_topic" value="/scan_cloud"/>
+            <param name="scan_destination_topic" value="/scan"/>
+            <param name="laserscan_topics" value ="/front_scan /back_scan" /> <!-- LIST OF THE LASER SCAN TOPICS TO SUBSCRIBE -->
+            <param name="angle_min" value="-3.14159274101"/>
+            <param name="angle_max" value="3.14159274101"/>
+            <param name="angle_increment" value="0.00436332309619"/>
+            <param name="scan_time" value="0.025"/>
+            <param name="range_min" value="0.23"/>
+            <param name="range_max" value="60.0"/>
+        </node>
+    </group>
 </launch>

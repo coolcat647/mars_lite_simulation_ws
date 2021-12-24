@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <gazebo reference='base_link_to_tm_base_link'>
+    <gazebo reference='base_link_to_tm_base'>
         <disableFixedJointLumping>true</disableFixedJointLumping>
     </gazebo>
     <!-- <gazebo reference='footprint_joint'>
@@ -19,20 +19,20 @@
     </gazebo>
 
     <!-- Uncomment for simulating the 'chatter' moving behavior -->
-    <!-- <gazebo reference="left_wheel">
-        <mu1 value="1.0"/>
-        <mu2 value="1.0"/>
+    <gazebo reference="left_wheel">
+        <mu1 value="1.5"/>
+        <mu2 value="1.5"/>
         <kp  value="1000000.0" />
         <kd  value="10000.0" />
         <fdir1 value="1 0 0"/>
     </gazebo>
     <gazebo reference="right_wheel">
-        <mu1 value="1.0"/>
-        <mu2 value="1.0"/>
+        <mu1 value="1.5"/>
+        <mu2 value="1.5"/>
         <kp  value="1000000.0" />
         <kd  value="10000.0" />
         <fdir1 value="1 0 0"/>
-    </gazebo> -->
+    </gazebo>
 
     <transmission name="left_wheel_trans">
         <type>transmission_interface/SimpleTransmission</type>

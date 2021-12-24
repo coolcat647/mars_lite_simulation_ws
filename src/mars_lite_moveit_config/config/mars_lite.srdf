@@ -165,4 +165,11 @@
     <disable_collisions link1="right_wheel" link2="tm_cntrl_box" reason="Never" />
     <disable_collisions link1="tm_base_link" link2="tm_cntrl_box" reason="Never" />
     <disable_collisions link1="tm_cntrl_box" link2="tm_shoulder_1_link" reason="Never" />
+    <disable_collisions link1="base_link" link2="back_laser_frame" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="front_laser_frame" reason="Adjacent" />
+
+    <disable_collisions link1="base_link" link2="front_left_caster_support" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="front_right_caster_support" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="back_left_caster_support" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="back_right_caster_support" reason="Adjacent" />
 </robot>

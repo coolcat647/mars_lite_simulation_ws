@@ -8,14 +8,17 @@ Experimental ROS workspace for the simulation of the MARS mobile manipulator.
 # Make sure you have installed ROS1 and Moveit first !!
 sudo apt-get update
 sudo apt-get install -y ros-${ROS_DISTRO}-joint-trajectory-controller \
-    ros-${ROS_DISTRO}-gripper-action-controller
+    ros-${ROS_DISTRO}-gripper-action-controller \
+    ros-${ROS_DISTRO}-hector-models \
+    ros-${ROS_DISTRO}-ira-laser-tools
 ```
 
 ### Instructions
 ```bash
 # Terminal 1 -- launch gazebo
-roslaunch mars_lite_description mars_gazebo.launch
-# If you have launch other gazebo environment already, please use "roslaunch mars_lite_description spawn_mars.launch" to spawn robot model.
+roslaunch mars_lite_description mars_gazebo.launch realsense_enabled:=true
+# If you have launched other gazebo environment already, 
+# please use "roslaunch mars_lite_description spawn_mars.launch realsense_enabled:=true" to spawn robot model.
 
 
 # Terminal 2 -- launch moveit gui
